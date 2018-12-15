@@ -51,6 +51,22 @@ class MapComponent extends Component {
                                                 {this.props.occurencia}
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                Rubrica
+                                            </td>
+                                            <td className="text-warning">
+                                                {this.props.rubrica}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Especie
+                                            </td>
+                                            <td className="text-warning">
+                                                {this.props.especie}
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -81,6 +97,22 @@ class MapComponent extends Component {
                                             </td>
                                             <td className="text-warning">
                                                 {this.props.occurencia}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Rubrica
+                                            </td>
+                                            <td className="text-warning">
+                                                {this.props.rubrica}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Especie
+                                            </td>
+                                            <td className="text-warning">
+                                                {this.props.especie}
                                             </td>
                                         </tr>
                                         </tbody>

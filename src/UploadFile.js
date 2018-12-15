@@ -835,7 +835,7 @@ class UploadFile extends Component {
                     <div className="col-11 d-inline-block">
                         <div className="react-datepicker-wrapper">
                             <div className="react-datepicker__input-container">
-                                <input type="text" name="nmSearch" id="idSearch" placeholder="enter comma separated keywords for wild card search..."
+                                <input type="text" name="nmSearch" id="idSearch" placeholder="digite palavra chaves separado por virgula para busca wild card..."
                                         ref="searchBox" onChange={this.manageSearchButtons}
                                        className="react-datepicker-ignore-onclickoutside"/>
                                 <FaInfoCircle onClick={this.toggleSearchPopper} id="searchPopper" style={{color: 'orange', cursor: 'pointer'}} />
