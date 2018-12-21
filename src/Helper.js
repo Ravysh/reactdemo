@@ -12,11 +12,11 @@ export default class Helper {
 
     static getClientId() {
 
-         return '0oaec0zyf1tVzyXDl0h7'; //DEV
+         //return '0oaec0zyf1tVzyXDl0h7'; //DEV
         //return '0oae057tzmrQTeTtx0h7'; // PROD
         //return '0oafpwpqi1fccmdQ50h7'; //DJTEST
         //return '0oaft24x1mQsVrPr80h7'; //DJTEST2
-       //return '0oaftapr7p9Jr1p1z0h7'; //prodatalink
+       return '0oaftapr7p9Jr1p1z0h7'; //prodatalink
 
 
     }

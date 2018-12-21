@@ -925,18 +925,35 @@ class UploadFile extends Component {
                                                     )} */}
                                                     <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('oubo', 'NATUREZA')} />Roubo <br/>
                                                     <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('urto', 'NATUREZA')}/>Furto <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('irregular de arma', 'NATUREZA')}/>Porte Ilegal Arma <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('droga', 'NATUREZA')} />Trafico Drogas <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('veículo localizado/apreendido', 'NATUREZA')}/>Auto Localização <br/>
+                                                   
                                                    
                                                 </div>
 
                                             </td>
                                             <td>
                                                 <div style={{minHeight: 150, maxHeight: 150, overflowY: 'auto'}}>
-                                                    {this.state.tipoDeLocalFilterOptions.map((tf, idx) =>
+                                                    {/* {this.state.tipoDeLocalFilterOptions.map((tf, idx) =>
                                                         <div key={'tf-'+idx}>
                                                             <input className="ml-1" type="checkbox" onChange={() => this.modifyAdvFilter(tf, 'TIPODELOCAL')} />
                                                             <span className="ml-1">{tf}</span>
                                                         </div>
-                                                    )}
+                                                    )} */}
+
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('bancário', 'TIPODELOCAL')} />Bancario <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('carga', 'TIPODELOCAL')}/>Carga <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('Comércio', 'TIPODELOCAL')} />Comércio <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('Empresa', 'TIPODELOCAL')}/>Empresa <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('Escola', 'TIPODELOCAL')}/>Escolar <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('pública', 'TIPODELOCAL')}/>Publico <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('Residência', 'TIPODELOCAL')} />Residência <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('rural', 'TIPODELOCAL')}/>Rural <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('transeunte', 'TIPODELOCAL')} />Transuente <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('veiculo particular', 'TIPODELOCAL')}/>Veiculo Carga <br/>
+                                                    <input className="ml-1 mr-1" type="checkbox" onChange={() => this.modifyAdvFilter('veiculo particular', 'TIPODELOCAL')} />Veiculo Particular <br/>
+                                                 
                                                 </div>
                                             </td>
                                             <td>
