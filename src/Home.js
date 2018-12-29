@@ -11,6 +11,7 @@ import Map from './Map';
 import {ToastContainer} from 'react-toastr';
 import {BeatLoader} from 'react-spinners';
 import Charts from "./Charts";
+import Helper from "./Helper";
 
 class Home extends Component {
 
@@ -29,7 +30,8 @@ class Home extends Component {
             mapData: [],
             displayMapData: [],
             dataProcessing: false,
-            chartData: []
+            chartData: [],
+            userData: null
         };
         this.checkAuthentication = this.checkAuthentication.bind(this);
         this.checkAuthentication();
@@ -57,22 +59,28 @@ class Home extends Component {
             this.setState({ authenticated });
             if(userInfo) {
                 this.setState({userName: userInfo.name, userEmail: userInfo.email});
+                let response;
+                let data;
+                try {
+                    response = await fetch(Helper.getAPI() + 'user/role', {
+                        headers: {
+                            Authorization: 'Bearer ' + await this.props.auth.getAccessToken(),
+                            UserId: this.state.userEmail
+                        }
+                    });
+                    data = await response.json();
+                    if(data) {
+                        this.setState({userData: data, userRole: data.role, displayAddUserMenu: (data.role === 'SUPER_ADMIN' || data.role === 'LOCAL_ADMIN')});
+                    }
+                } catch(err){
+                    this.notify('Error', 'error', 'Error!');
+                }
             }
         }
     }
 
     componentDidUpdate() {
         this.checkAuthentication();
-    }
-
-    updateUserRole(role) {
-        console.log(role);
-        if(role === 'SUPER_ADMIN') {
-            this.setState({userRole: role, displayAddUserMenu: true});
-        } else {
-            this.setState({userRole: role, displayAddUserMenu: false});
-        }
-
     }
 
     updateMapData(data) {
@@ -161,11 +169,11 @@ class Home extends Component {
                         </div>
                         <div className="col-10" style={{display: this.state.displayUpload ? '' : 'none'}}>
                             <UploadFile manageScreenLoader={flag => this.manageScreenLoader(flag)}
-                                        updateUser={role=>this.updateUserRole(role)} notify={(title, type, message)  => this.notify(title, type, message)}
-                                        userId={this.state.userEmail} updateMapData={data=>this.updateMapData(data)} updateChartData={reports => this.updateChartData(reports)} />
+                                         notify={(title, type, message)  => this.notify(title, type, message)}
+                                        userId={this.state.userEmail} updateMapData={data=>this.updateMapData(data)} userRole={this.state.userRole} updateChartData={reports => this.updateChartData(reports)} />
                         </div>
                         <div className="col-10" style={{display: this.state.displayUserManagement ? '' : 'none'}}>
-                            <UserManagement manageScreenLoader={flag => this.manageScreenLoader(flag)} userId={this.state.userEmail} notify={(title, type, message)  => this.notify(title, type, message)} />
+                            <UserManagement manageScreenLoader={flag => this.manageScreenLoader(flag)} userId={this.state.userEmail} userRole={this.state.userRole} userData={this.state.userData} notify={(title, type, message)  => this.notify(title, type, message)} />
                         </div>
                         {this.state.displayMapData.length > 0 &&
                             <div className="col-10" style={{display: this.state.displayReport ? '' : 'none'}}>

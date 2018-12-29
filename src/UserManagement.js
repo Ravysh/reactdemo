@@ -22,18 +22,23 @@ class UserManagement extends Component {
             emailId: '',
             users: [],
             searchedUsers: [],
-            noDataText: 'Loading...'
+            noDataText: 'Loading...',
+            newUserRole: 'USER',
+            newUserCity: 'AMERICANA'
         }
 
         this.addUser = this.addUser.bind(this);
         this.validate = this.validate.bind(this);
+        this.setUserRole = this.setUserRole.bind(this);
+        this.setUserCity = this.setUserCity.bind(this);
     }
 
     async componentDidMount() {
         try {
             const response = await fetch(Helper.getAPI() + 'users', {
                 headers: {
-                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken()
+                    Authorization: 'Bearer ' + await this.props.auth.getAccessToken(),
+                    UserId: this.props.userId
                 }
             });
             const data = await response.json();
@@ -79,12 +84,23 @@ class UserManagement extends Component {
     async addUser() {
         let response;
         let data;
+
+        let userRole = this.state.newUserRole;
+        let userCity = this.state.newUserCity;
+
+        if(this.props.userRole === 'LOCAL_ADMIN') {
+            userRole = 'USER';
+            userCity = this.props.userData.group;
+        }
+
         this.props.manageScreenLoader(true);
         try {
             const user = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
-                userId: this.state.emailId
+                userId: this.state.emailId,
+                group: userCity,
+                role: userRole
             };
 
              response = await fetch(Helper.getAPI() + 'users/create', {
@@ -96,7 +112,6 @@ class UserManagement extends Component {
                 body: JSON.stringify(user)
         });
              data = await response.json();
-             console.log(data);
             if(data) {
                 const currentUsers = this.state.users;
                 currentUsers.unshift(data);
@@ -108,6 +123,14 @@ class UserManagement extends Component {
             this.props.manageScreenLoader(false);
             this.props.notify('Error', 'error', 'User already exists!');
         }
+    }
+
+    setUserRole(e) {
+        this.setState({newUserRole: e.target.value});
+    }
+
+    setUserCity(e) {
+        this.setState({newUserCity: e.target.value});
     }
 
     render() {
@@ -178,11 +201,28 @@ class UserManagement extends Component {
                                     </InputGroupAddon>
                                 </InputGroup>
                             </Col>
-
-                            <Col sm={3}>
+                            <Col sm={2}>
                                 <Button size="sm" disabled={!(this.state.firstNameValid==='Y' && this.state.lastNameValid==='Y' && this.state.emailIdValid==='Y')} className="mt-1" outline color="warning" onClick={this.addUser}>Adicionar Usuarios</Button>
                             </Col>
                         </FormGroup>
+                        <div style={{display: this.props.userRole === 'SUPER_ADMIN' ? '' : 'none'}}>
+                            <FormGroup row className="ml-2 mr-2">
+                            <Col sm={3}>
+                                <Input type="select" name="nmCity" id="idCity" onChange={this.setUserCity}>
+                                    <option value="AMERICANA" selected>Americana</option>
+                                    <option value="COSMOPOLIS">Cosmopolis</option>
+                                    <option value="JUNDIAI">Jundiai</option>
+                                </Input>
+                            </Col>
+
+                            <Col sm={3}>
+                                <Input type="select" name="nmRole" id="idRole" onChange={this.setUserRole}>
+                                    <option value="USER" selected>User</option>
+                                    <option value="LOCAL_ADMIN">Admin</option>
+                                </Input>
+                            </Col>
+                            </FormGroup>
+                        </div>
                     </Form>
                 </div>
 

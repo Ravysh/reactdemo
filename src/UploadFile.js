@@ -59,7 +59,7 @@ class UploadFile extends Component {
             mapData: [],
             searchEligible: false,
             uploadFilesReturnedFromServer: [],
-            userRole: '',
+            userRole: props.userRole,
             reportEditMode: false,
             editTooltipOpen: false,
             cancelEditTooltipOpen: false,
@@ -323,8 +323,8 @@ class UploadFile extends Component {
             const data = await response.json();
             // console.log(data);
             if (data && data.length > 0) {
-                this.props.updateUser(data[0].userRole);
-                this.setState({reports: data, searchResult: data, tableLoading: false, userRole: data[0].userRole});
+
+                this.setState({reports: data, searchResult: data, tableLoading: false});
                 //this.getMapCoordinates(data);
 
                 const tempOptions1 = [];
