@@ -4,12 +4,24 @@ import GoogleMapReact from 'google-map-react';
 
 import MapComponent from './MapComponent';
 
+const handleApiLoaded = (map, maps) => {
+    var KML = new maps.KmlLayer({
+        url: 'https://raw.githubusercontent.com/dhirajprakash/googlemaps/master/americana2.kml'
+    });
+    KML.setMap(map);
+
+}
+
 
 class Map extends Component {
 
     constructor(props) {
         super(props);
     }
+
+    
+
+    
 
 
     render() {
@@ -60,6 +72,8 @@ class Map extends Component {
                     bootstrapURLKeys={{ key: 'AIzaSyCvKqs285DpxtdI8spf2Vi64gFhSE7N4lw' }}
                     defaultCenter={{lat: this.props.mapData[0].lat, lng:this.props.mapData[0].lng }}
                     defaultZoom={13}
+                    yesIWantToUseGoogleMapApiInternals={true}
+                    onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
                 >
                     {mapComp}
                    
