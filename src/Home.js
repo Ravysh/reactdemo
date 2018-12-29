@@ -73,7 +73,7 @@ class Home extends Component {
                         this.setState({userData: data, userRole: data.role, displayAddUserMenu: (data.role === 'SUPER_ADMIN' || data.role === 'LOCAL_ADMIN')});
                     }
                 } catch(err){
-                    this.notify('Error', 'error', 'Error!');
+                    
                 }
             }
         }
