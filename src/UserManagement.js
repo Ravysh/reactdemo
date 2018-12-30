@@ -106,7 +106,8 @@ class UserManagement extends Component {
              response = await fetch(Helper.getAPI() + 'users/create', {
                 headers: {
                     Authorization: 'Bearer ' + await this.props.auth.getAccessToken(),
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    UserId: this.props.userId
             },
                 method: 'POST',
                 body: JSON.stringify(user)
